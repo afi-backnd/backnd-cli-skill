@@ -1,0 +1,23 @@
+[
+  {
+    "id": "drop-rate-patch",
+    "prompt": "드랍률 패치해줘",
+    "expected_domain": "probability",
+    "expected_command_hint": "probability",
+    "notes": "chart는 probability table의 별칭이지 통계 차트가 아님. infra.md에서 명시."
+  },
+  {
+    "id": "ranking-query",
+    "prompt": "랭킹 조회해줘",
+    "expected_domain": "leaderboard",
+    "expected_command_hint": "leaderboard",
+    "notes": "ranking이라는 CLI 명령어 없음. korean-mapping의 리더보드/순위 동의어 클러스터가 커버."
+  },
+  {
+    "id": "game-data-backup",
+    "prompt": "게임 데이터 백업해줘",
+    "expected_domain": "game-info",
+    "expected_command_hint": "game-info export",
+    "notes": "game-info = 커스텀 게임 데이터 테이블. database는 DB 스키마 조회용. data.md에서 명시."
+  }
+]

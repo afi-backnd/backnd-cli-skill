@@ -51,6 +51,37 @@ The file has three sections — use them in order:
 
 Combine the domain hint + action hint, then use `--help` to find the actual current command path. The hints are directional, not literal — never pass them to the CLI without verifying via `--help` first.
 
+## Domain modules
+
+Some domains have non-obvious command distinctions, high-risk operations, or multi-step workflows that `--help` alone won't explain. Consult the relevant module before proceeding:
+
+- **Data** — `game-info`, `database`, `cloud-save`, `db-usage`, `game-log` → [`data.md`](data.md)
+- **Users** — `gamer`, `blocking`, `gm`, `group` → [`users.md`](users.md)
+- **Billing** — `receipt`, `refund`, `cash`, `coupon`, `webshop`, `payment` → [`billing.md`](billing.md)
+- **Operations** — `operation`, `push`, `notification`, `post`, `notice`, `alarm`, `setting` → [`operation.md`](operation.md)
+- **Leaderboard** — `leaderboard`, `rank`, `guild` → [`leaderboard.md`](leaderboard.md)
+- **Analytics** — `dashboard`, `statistics`, `function`, `feature` → [`analytics.md`](analytics.md)
+- **Infrastructure** — `server-api`, `realtime`, `world`, `matchmaking`, `serviceplan`, `probability`, `random-pool` → [`infra.md`](infra.md)
+- **Content** — `chat`, `popup`, `tutorial`, `console`, `account-setting` → [`content.md`](content.md)
+
+## High-risk commands — always dry-run first
+
+Some commands mutate data at scale and are irreversible. Before running any of these, run with `--dry-run` first and confirm the affected list with the user:
+
+- `gamer delete` / `gamer bulk-delete` — permanent player account deletion
+- `leaderboard reset` — wipes all scores for a leaderboard
+- `block gamer` (bulk) — blocks multiple players at once
+- `coupon revoke` (bulk) — invalidates multiple coupons at once
+
+Pattern:
+```
+backnd <command> --dry-run ...    # show what would happen
+# review output with user, then:
+backnd <command> ...              # execute only after user confirms
+```
+
+Never execute a mass-mutation command in a single step without a prior dry-run.
+
 ## Pagination
 
 Many list commands return a limited set of results. Always check whether more pages exist and handle them appropriately.
