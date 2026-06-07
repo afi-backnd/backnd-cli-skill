@@ -4,7 +4,7 @@
     "prompt": "드랍률 패치해줘",
     "expected_domain": "probability",
     "expected_command_hint": "probability",
-    "notes": "chart는 probability table의 별칭이지 통계 차트가 아님. infra.md에서 명시."
+    "notes": "probability는 가챠/드랍률 테이블 관리 명령어. chart(데이터 테이블)와는 완전히 별개 도메인."
   },
   {
     "id": "ranking-query",
@@ -16,8 +16,36 @@
   {
     "id": "game-data-backup",
     "prompt": "게임 데이터 백업해줘",
-    "expected_domain": "game-info",
-    "expected_command_hint": "game-info export",
-    "notes": "game-info = 커스텀 게임 데이터 테이블. database는 DB 스키마 조회용. data.md에서 명시."
+    "expected_domain": "gameinfo",
+    "expected_command_hint": "gameinfo export-start",
+    "notes": "gameinfo = 커스텀 게임 데이터 테이블. database는 DB 스키마 조회용. data.md에서 명시."
+  },
+  {
+    "id": "collision-gamelog-vs-event",
+    "prompt": "이벤트 로그 조회해줘",
+    "expected_domain": "gamelog",
+    "expected_command_hint": "gamelog",
+    "notes": "충돌 케이스: '이벤트'라는 단어가 있지만 '로그 조회' 맥락이므로 gamelog. operation의 event(인게임 이벤트 관리)와 혼동 금지. korean-mapping의 gamelog 클러스터에서 '이벤트' 단어를 제거했으므로 '이벤트 로그' → gamelog는 '로그' 키워드로 라우팅되어야 함."
+  },
+  {
+    "id": "collision-ingame-event-vs-gamelog",
+    "prompt": "이번 시즌 이벤트 만들어줘",
+    "expected_domain": "event",
+    "expected_command_hint": "event create",
+    "notes": "충돌 케이스: '이벤트'가 인게임 이벤트 관리(operation.md의 event 명령)를 의미함. gamelog로 라우팅되면 안 됨. '만들어줘(create)' 액션과 '시즌 이벤트' 맥락이 힌트."
+  },
+  {
+    "id": "collision-probability-vs-random",
+    "prompt": "확률 수정해줘",
+    "expected_domain": "probability",
+    "expected_command_hint": "probability update",
+    "notes": "충돌 케이스: probability(가챠 확률 테이블 관리)와 random(랜덤 카드 조회)은 완전히 다른 데이터스토어. '수정'이라는 액션과 '확률' 도메인이 명확히 probability를 가리킴. random으로 라우팅되면 안 됨."
+  },
+  {
+    "id": "collision-operation-vs-notice",
+    "prompt": "인게임 공지 올려줘",
+    "expected_domain": "operation",
+    "expected_command_hint": "operation create",
+    "notes": "충돌 케이스: '인게임 공지'는 operation(기본). notice는 게임 외부의 공지사항 관리. '인게임' 수식어가 있으면 operation 우선."
   }
 ]

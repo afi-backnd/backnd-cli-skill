@@ -27,21 +27,31 @@ cannot be undone.
 
 **guild delete**
 
-Before deleting a guild, check the current member count:
+Before deleting a guild, check the current members:
 ```
-backnd guild info --json --id <guild-id>    # check member_count
+backnd guild guild-get --json --guild-name <guild-name>    # check members
 ```
 If members exist, ask the user how to handle them (transfer ownership, notify, etc.)
 before deleting.
 
 ## Common patterns
 
-**List top N players on a board:**
+**List all leaderboard configurations:**
 ```
-backnd leaderboard list --json --id <board-id> --limit 100
+backnd leaderboard list --json
+```
+
+**Get top N ranks on a board:**
+```
+backnd leaderboard ranks --json <board-uuid>
 ```
 
 **Find a player's current rank:**
 ```
-backnd leaderboard info --json --id <board-id> --gamer-id <gamer-id>
+backnd leaderboard rank-search --json --id <board-uuid> --gamer-id <gamer-id>
+```
+
+**Inspect a specific leaderboard:**
+```
+backnd leaderboard describe --json <board-uuid>
 ```

@@ -6,9 +6,9 @@ Commands: `chat`, `popup`, `tutorial`, `console`, `account-setting`, `account-ca
 
 **chat ban vs game ban**
 - `chat` ban → restricts a player from posting in chat channels only
-- `blocking` → bans a player from the game entirely (see `users.md`)
+- `block` → bans a player from the game entirely (see `users.md`)
 - "채팅 금지" → `chat ban`
-- "게임 정지", "이용 제한" → `blocking` in users domain
+- "게임 정지", "이용 제한" → `block` in users domain
 
 **popup — this is a CONSOLE dashboard popup, not an in-game notice**
 - `popup` creates a popup in the Backnd operator console (staff-facing)
@@ -31,8 +31,8 @@ Commands: `chat`, `popup`, `tutorial`, `console`, `account-setting`, `account-ca
 
 **Mute a player in chat:**
 ```
-backnd chat --help                            # confirm ban subcommand
-backnd chat ban --json --id <gamer-id> --channel-id <channel>
+backnd chat ban-update --json --gamer-id <gamer-id> --days <N>   # ban for N days
+backnd chat ban-update --json --gamer-id <gamer-id> --days 0     # unban
 ```
 
 **List active chat channels:**

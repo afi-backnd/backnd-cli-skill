@@ -55,23 +55,23 @@ Combine the domain hint + action hint, then use `--help` to find the actual curr
 
 Some domains have non-obvious command distinctions, high-risk operations, or multi-step workflows that `--help` alone won't explain. Consult the relevant module before proceeding:
 
-- **Data** — `game-info`, `database`, `cloud-save`, `db-usage`, `game-log` → [`data.md`](data.md)
-- **Users** — `gamer`, `blocking`, `gm`, `group` → [`users.md`](users.md)
+- **Data** — `gameinfo`, `database`, `cloud-save`, `dbusage`, `gamelog`, `chart` → [`data.md`](data.md)
+- **Users** — `gamer`, `block`, `gm`, `group` → [`users.md`](users.md)
 - **Billing** — `receipt`, `refund`, `cash`, `coupon`, `webshop`, `payment` → [`billing.md`](billing.md)
-- **Operations** — `operation`, `push`, `notification`, `post`, `notice`, `alarm`, `setting` → [`operation.md`](operation.md)
+- **Operations** — `operation`, `event`, `push`, `notification`, `post`, `notice`, `alarm`, `setting` → [`operation.md`](operation.md)
 - **Leaderboard** — `leaderboard`, `rank`, `guild` → [`leaderboard.md`](leaderboard.md)
-- **Analytics** — `dashboard`, `statistics`, `function`, `feature` → [`analytics.md`](analytics.md)
-- **Infrastructure** — `server-api`, `realtime`, `world`, `matchmaking`, `serviceplan`, `probability`, `random-pool` → [`infra.md`](infra.md)
+- **Analytics** — `dashboard`, `statistics`, `feature` → [`analytics.md`](analytics.md)
+- **Infrastructure** — `serverapi`, `realtime-noti`, `world`, `matchmake`, `serviceplan`, `probability`, `random-pool`, `random`, `function` → [`infra.md`](infra.md)
 - **Content** — `chat`, `popup`, `tutorial`, `console`, `account-setting` → [`content.md`](content.md)
 
 ## High-risk commands — always dry-run first
 
 Some commands mutate data at scale and are irreversible. Before running any of these, run with `--dry-run` first and confirm the affected list with the user:
 
-- `gamer delete` / `gamer bulk-delete` — permanent player account deletion
+- `gamer delete` — permanent player account deletion (accepts multiple IDs)
 - `leaderboard reset` — wipes all scores for a leaderboard
 - `block gamer` (bulk) — blocks multiple players at once
-- `coupon revoke` (bulk) — invalidates multiple coupons at once
+- `coupon delete` (bulk) — invalidates multiple coupons at once
 
 Pattern:
 ```
@@ -82,13 +82,18 @@ backnd <command> ...              # execute only after user confirms
 
 Never execute a mass-mutation command in a single step without a prior dry-run.
 
+For complex multi-step workflows involving these operations, see hero recipes:
+- [`bulk-block.md`](bulk-block.md) — 여러 플레이어 일괄 차단 워크플로우
+- [`coupon-stats.md`](coupon-stats.md) — 쿠폰 통계 분석 워크플로우
+- [`refund-receipt-join.md`](refund-receipt-join.md) — 환불+영수증 조인 분석 워크플로우
+
 ## Pagination
 
 Many list commands return a limited set of results. Always check whether more pages exist and handle them appropriately.
 
 ### Cursor-based (`--next-page`)
 
-Commands: `gamer search`, `push list`, `guild guilds`, and others.
+Commands: `gamer list`, `push list`, `guild guilds`, and others.
 
 After the JSON data, a separate status line signals whether more results exist:
 

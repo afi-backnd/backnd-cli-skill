@@ -1,39 +1,30 @@
 # Analytics Domain
 
-Commands: `dashboard`, `statistics`, `function`, `feature`
+Commands: `dashboard`, `statistics`, `feature`
 
 ## Non-obvious distinctions
 
 **dashboard vs statistics**
-- `dashboard` — real-time DAU/MAU and live session metrics (today's numbers)
-- `statistics` — historical time-series data over a date range
-- "오늘 접속자 수" → `dashboard`
-- "지난달 통계" → `statistics`
-
-**function — not analytics**
-- `function` manages Lambda / serverless functions deployed to Backnd
-- Despite the name, this is infrastructure management, not an analytics function
-- "람다 함수 목록 보여줘" → `function`
+- `dashboard` — DAU/MAU and session metrics queried by year/month (fixed calendar unit)
+- `statistics` — DAU/MAU for a flexible start-date/end-date range
+- "3월 DAU 보여줘" → `dashboard dau --year 2026 --month 3`
+- "지난 2주 DAU" → `statistics dau --start-date ... --end-date ...`
 
 **feature**
-- Feature flag management — enable/disable game features by toggle
-- "피처 플래그 켜줘" → `feature`
+- Read-only query for feature initialization dates (when key game features were activated)
+- Not a toggle — no enable/disable subcommands
+- "기능 초기화 날짜 확인" → `feature dates`
 
 ## Common patterns
 
-**Get today's DAU:**
+**Get DAU for a specific month:**
 ```
-backnd dashboard --json
-```
-
-**Get monthly statistics for a date range:**
-```
-backnd statistics --json --from 2026-05-01 --to 2026-05-31
+backnd dashboard dau --json --year 2026 --month 6
 ```
 
-**List deployed Lambda functions:**
+**Get DAU for a flexible date range:**
 ```
-backnd function list --json
+backnd statistics dau --json --start-date 2026-05-01 --end-date 2026-05-31
 ```
 
 ## Notes

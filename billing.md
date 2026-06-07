@@ -24,11 +24,11 @@ Never change refund status without verifying the receipt first:
 
 ```
 # Step 1 — find and confirm the receipt
-backnd receipt list --json --id <gamer-id>
-backnd receipt info --json --receipt-id <receipt-id>
+backnd receipt list --json --gamer-id <gamer-id>
+backnd receipt describe --json --receipt-id <receipt-id>
 
-# Step 2 — update refund status
-backnd refund --json --receipt-id <receipt-id> --status <status>
+# Step 2 — update refund status (takes order-id, not receipt-id)
+backnd refund status --json --order-ids <order-id> --status <status>
 ```
 
 Ask the user for the receipt ID or order ID before starting. Changing refund status
@@ -36,6 +36,6 @@ on the wrong receipt cannot be undone from the CLI.
 
 ## Coupon notes
 
-- `coupon` supports `create`, `list`, `usage`, `revoke`
+- `coupon` supports `create`, `list`, `usage`, `delete`
 - `coupon usage` returns per-coupon redemption counts — useful for campaign analytics
 - Bulk revoke is high-risk (see SKILL.md high-risk section)
