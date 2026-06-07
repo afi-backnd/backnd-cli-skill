@@ -55,5 +55,5 @@ backnd probability update --json --id <table-id> --item <item> --rate <rate>
 
 **Check current service plan:**
 ```
-backnd serviceplan --json
+backnd serviceplan status refund-management
 ```

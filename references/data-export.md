@@ -23,13 +23,13 @@ backnd gamer list --json
 특정 필드만 추출:
 
 ```
-backnd gamer list --json | jq '[.[] | {gamer_id, nickname, in_date, last_login, is_blocked}]'
+backnd gamer list --json | jq '[.data[] | {gamer_id, nickname, in_date, last_login, is_blocked}]'
 ```
 
 차단 유저만 필터:
 
 ```
-backnd gamer list --json | jq '[.[] | select(.is_blocked == "y")]'
+backnd gamer list --json | jq '[.data[] | select(.is_blocked == "y")]'
 ```
 
 ## 매출 데이터 추출
@@ -37,7 +37,7 @@ backnd gamer list --json | jq '[.[] | select(.is_blocked == "y")]'
 월별 결제 사용량 요약:
 
 ```
-backnd payment usage-monthly --year <YYYY> --month <M> --json | jq '.totalSummary'
+backnd payment usage-total --json | jq '.totalSummary'
 ```
 
 영수증 목록으로 건별 거래 내역:
@@ -67,8 +67,8 @@ backnd dashboard retention --date <YYYY-MM-DD> --json
 두 기간의 DAU를 합쳐 비교:
 
 ```
-backnd dashboard dau --year 2026 --month 2 --json > /tmp/feb.json
-backnd dashboard dau --year 2026 --month 3 --json > /tmp/mar.json
+backnd dashboard dau --year 2026 --month 2 --json | jq '.data' > /tmp/feb.json
+backnd dashboard dau --year 2026 --month 3 --json | jq '.data' > /tmp/mar.json
 jq -s '[.[0], .[1]] | flatten' /tmp/feb.json /tmp/mar.json
 ```
 

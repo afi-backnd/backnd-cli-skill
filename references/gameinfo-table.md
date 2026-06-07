@@ -16,7 +16,7 @@ backnd gameinfo create-table --name "<table-name>" --table-type <private|public>
 ## 2단계 — 테이블 목록 확인
 
 ```
-backnd gameinfo tables --json
+backnd gameinfo list --json
 ```
 
 ## 3단계 — 행 생성
