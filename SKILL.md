@@ -55,14 +55,14 @@ Combine the domain hint + action hint, then use `--help` to find the actual curr
 
 Some domains have non-obvious command distinctions, high-risk operations, or multi-step workflows that `--help` alone won't explain. Consult the relevant module before proceeding:
 
-- **Data** — `gameinfo`, `database`, `cloud-save`, `dbusage`, `gamelog`, `chart` → [`data.md`](data.md)
-- **Users** — `gamer`, `block`, `gm`, `group` → [`users.md`](users.md)
-- **Billing** — `receipt`, `refund`, `cash`, `coupon`, `webshop`, `payment` → [`billing.md`](billing.md)
-- **Operations** — `operation`, `event`, `push`, `notification`, `post`, `notice`, `alarm`, `setting` → [`operation.md`](operation.md)
-- **Leaderboard** — `leaderboard`, `rank`, `guild` → [`leaderboard.md`](leaderboard.md)
-- **Analytics** — `dashboard`, `statistics`, `feature` → [`analytics.md`](analytics.md)
-- **Infrastructure** — `serverapi`, `realtime-noti`, `world`, `matchmake`, `serviceplan`, `probability`, `random-pool`, `random`, `function` → [`infra.md`](infra.md)
-- **Content** — `chat`, `popup`, `tutorial`, `console`, `account-setting` → [`content.md`](content.md)
+- **Data** — `gameinfo`, `database`, `cloud-save`, `dbusage`, `gamelog`, `chart` → [`data.md`](references/data.md)
+- **Users** — `gamer`, `block`, `gm`, `group` → [`users.md`](references/users.md)
+- **Billing** — `receipt`, `refund`, `cash`, `coupon`, `webshop`, `payment` → [`billing.md`](references/billing.md)
+- **Operations** — `operation`, `event`, `push`, `notification`, `post`, `notice`, `alarm`, `setting` → [`operation.md`](references/operation.md)
+- **Leaderboard** — `leaderboard`, `rank`, `guild` → [`leaderboard.md`](references/leaderboard.md)
+- **Analytics** — `dashboard`, `statistics`, `feature` → [`analytics.md`](references/analytics.md)
+- **Infrastructure** — `serverapi`, `realtime-noti`, `world`, `matchmake`, `serviceplan`, `probability`, `random-pool`, `random`, `function` → [`infra.md`](references/infra.md)
+- **Content** — `chat`, `popup`, `tutorial`, `console`, `account-setting` → [`content.md`](references/content.md)
 
 ## High-risk commands — always dry-run first
 
@@ -83,9 +83,17 @@ backnd <command> ...              # execute only after user confirms
 Never execute a mass-mutation command in a single step without a prior dry-run.
 
 For complex multi-step workflows involving these operations, see hero recipes:
-- [`bulk-block.md`](bulk-block.md) — 여러 플레이어 일괄 차단 워크플로우
-- [`coupon-stats.md`](coupon-stats.md) — 쿠폰 통계 분석 워크플로우
-- [`refund-receipt-join.md`](refund-receipt-join.md) — 환불+영수증 조인 분석 워크플로우
+- [`bulk-block.md`](references/bulk-block.md) — 여러 플레이어 일괄 차단 워크플로우
+- [`bulk-reward-post.md`](references/bulk-reward-post.md) — 전체 유저 일괄 보상 우편 발송
+- [`coupon-stats.md`](references/coupon-stats.md) — 쿠폰 통계 분석 워크플로우
+- [`refund-receipt-join.md`](references/refund-receipt-join.md) — 환불+영수증 조인 분석 워크플로우
+
+## Hero recipes — 복잡한 멀티스텝 워크플로우
+
+`--help`만으로는 파악하기 어려운 흐름이 있는 작업:
+- [`coupon-lifecycle.md`](references/coupon-lifecycle.md) — 쿠폰 캠페인 생성부터 코드 관리까지
+- [`data-export.md`](references/data-export.md) — --json 파이프라인으로 유저·매출·리텐션 데이터 추출
+- [`gameinfo-table.md`](references/gameinfo-table.md) — gameinfo 커스텀 테이블 생성 및 행 관리
 
 ## Pagination
 

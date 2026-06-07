@@ -10,9 +10,13 @@
     "references/analytics.md",
     "references/infra.md",
     "references/content.md",
-    "references/refund-receipt-join.md",
     "references/bulk-block.md",
+    "references/bulk-reward-post.md",
+    "references/coupon-lifecycle.md",
     "references/coupon-stats.md",
+    "references/data-export.md",
+    "references/gameinfo-table.md",
+    "references/refund-receipt-join.md",
     "references/korean-mapping.md"
   ]
 }
