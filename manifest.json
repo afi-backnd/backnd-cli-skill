@@ -2,17 +2,17 @@
   "version": "0.1.0",
   "files": [
     "SKILL.md",
-    "data.md",
-    "users.md",
-    "billing.md",
-    "operation.md",
-    "leaderboard.md",
-    "analytics.md",
-    "infra.md",
-    "content.md",
-    "refund-receipt-join.md",
-    "bulk-block.md",
-    "coupon-stats.md",
+    "references/data.md",
+    "references/users.md",
+    "references/billing.md",
+    "references/operation.md",
+    "references/leaderboard.md",
+    "references/analytics.md",
+    "references/infra.md",
+    "references/content.md",
+    "references/refund-receipt-join.md",
+    "references/bulk-block.md",
+    "references/coupon-stats.md",
     "references/korean-mapping.md"
   ]
 }
