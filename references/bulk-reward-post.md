@@ -21,12 +21,14 @@ backnd post send --help
 
 먼저 테스트 계정 한 명에게 발송해 내용과 형식을 검증:
 
+`--receiver`는 gamer UUID가 아닌 **gamer inDate** 값을 받는다 (`backnd gamer list --json`으로 확인):
+
 ```
 backnd post send \
   --title "<title>" \
   --content "<content>" \
   --expiration-date "YYYY-MM-DDTHH:MM:SS.000Z" \
-  --receiver <test-gamer-id>
+  --receiver "2024-01-01T00:00:00.000Z"
 ```
 
 발송 후 해당 계정의 우편함에서 수신 확인:

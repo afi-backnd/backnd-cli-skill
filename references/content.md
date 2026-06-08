@@ -12,7 +12,7 @@ Commands: `chat`, `popup`, `tutorial`, `console`, `account-setting`, `account-ca
 
 **popup — this is a CONSOLE dashboard popup, not an in-game notice**
 - `popup` creates a popup in the Backnd operator console (staff-facing)
-- For in-game player-facing announcements, use `operation` or `notice` (see `operation.md`)
+- For in-game player-facing announcements, use `notice` (see `operation.md`)
 - Getting this wrong means announcements go to staff, not players
 
 **account-setting**
@@ -31,11 +31,12 @@ Commands: `chat`, `popup`, `tutorial`, `console`, `account-setting`, `account-ca
 
 **Mute a player in chat:**
 ```
-backnd chat ban-update --json --gamer-id <gamer-id> --days <N>   # ban for N days
-backnd chat ban-update --json --gamer-id <gamer-id> --days 0     # unban
+backnd chat ban update --json --gamer-id <gamer-id> --days <N>   # ban for N days
+backnd chat ban update --json --gamer-id <gamer-id> --days 0     # unban
 ```
 
-**List active chat channels:**
+**List active chat channels (`--type` 필수):**
 ```
-backnd chat list --json
+backnd chat channel list --json --type open
+# 유효 type: open, guild, whisper, private, property
 ```

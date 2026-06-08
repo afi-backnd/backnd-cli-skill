@@ -5,9 +5,9 @@
 ## 1단계 — 영수증 목록 추출
 
 ```
-backnd receipt list --json --id <gamer-id>
+backnd receipt list --json --gamer-id <gamer-id>
 # 또는 날짜 범위로:
-backnd receipt list --json --from 2026-05-01 --to 2026-05-31
+backnd receipt list --json --start-date 2026-05-01 --end-date 2026-05-31
 ```
 
 페이지네이션 신호를 확인하고 필요 시 `--next-page`로 전체 수집.
@@ -15,9 +15,9 @@ backnd receipt list --json --from 2026-05-01 --to 2026-05-31
 ## 2단계 — 환불 목록 추출
 
 ```
-backnd refund list --json --id <gamer-id>
+backnd refund list --json --user-uuid <gamer-id>
 # 또는:
-backnd refund list --json --status pending
+backnd refund list --json --status refunded
 ```
 
 ## 3단계 — receipt_id 기준으로 JOIN
@@ -32,7 +32,9 @@ backnd refund list --json --status pending
 처리할 대상을 사용자에게 목록으로 보여주고 확인 받은 후 진행:
 
 ```
-backnd refund --json --receipt-id <receipt-id> --status approved
+backnd refund status --json --order-ids <order-id> --status refunded
+# 유효 status: refunded, notification_sent, recovered, recovery_excluded, blocked_excluded, other
+# 다수 처리: --order-ids "id1,id2,id3"
 ```
 
 한 건씩 처리하거나, 다수를 처리할 경우 대상 목록을 미리 보여주고 confirm 후 루프 실행.

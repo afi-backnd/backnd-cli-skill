@@ -37,5 +37,5 @@ on the wrong receipt cannot be undone from the CLI.
 ## Coupon notes
 
 - `coupon` supports `create`, `list`, `usage`, `delete`
-- `coupon usage` returns per-coupon redemption counts — useful for campaign analytics
+- `coupon usage list` returns per-coupon redemption records — useful for campaign analytics
 - Bulk revoke is high-risk (see SKILL.md high-risk section)

@@ -34,10 +34,12 @@ backnd gamer list --json | jq '[.data[] | select(.is_blocked == "y")]'
 
 ## 매출 데이터 추출
 
-월별 결제 사용량 요약:
+월별 결제 사용량 요약 (`--period` 필수):
 
 ```
-backnd payment usage-total --json | jq '.totalSummary'
+backnd payment usage list --period total --json
+# 월별 세부:
+backnd payment usage list --period monthly --year 2026 --json
 ```
 
 영수증 목록으로 건별 거래 내역:
