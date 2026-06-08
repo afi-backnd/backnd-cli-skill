@@ -11,10 +11,15 @@ Commands: `operation`, `push`, `notification`, `post`, `notice`, `alarm`, `setti
 - "운영팀에 알림 보내줘" → `notification`
 - Getting these backwards causes real operational mistakes
 
-**operation vs notice**
-- `operation` — in-game announcement banners shown inside the game client
-- `notice` — notice board entries (may be surfaced differently depending on game integration)
-- Both are player-facing, but rendered in different UI contexts
+**operation — NOT for in-game announcements**
+- `operation` — player support & account management: 1:1 inquiries, account policy, web-links, inquiry forms
+- Subcommands: `question`, `account`, `policy`, `web-link`, `inquiry-format`
+- "유저 1:1 문의 확인", "계정 정책 변경" → `operation`
+
+**notice — the actual in-game announcement command**
+- `notice` — in-game announcements displayed to players inside the game client
+- Subcommands: `list`, `describe`, `create`, `update`, `delete`, `emergency`
+- "인게임 공지 올려줘", "공지사항 등록" → `notice create`
 
 **post**
 - In-game mail/inbox: send items or messages directly to a player's in-game mailbox
@@ -28,10 +33,10 @@ Commands: `operation`, `push`, `notification`, `post`, `notice`, `alarm`, `setti
 
 "공지사항 올려줘":
 ```
-backnd operation --help           # check current subcommands
-backnd operation create --help    # check required fields (title, content, start/end time)
-backnd operation create --json ...
+backnd notice --help           # check current subcommands
+backnd notice create --help    # check required fields (title, content, start/end time)
+backnd notice create --json ...
 ```
 
-Always confirm start/end times with the user — an operation with a wrong end time
+Always confirm start/end times with the user — a notice with a wrong end time
 may stay live indefinitely.

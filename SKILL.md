@@ -55,32 +55,32 @@ Combine the domain hint + action hint, then use `--help` to find the actual curr
 
 Some domains have non-obvious command distinctions, high-risk operations, or multi-step workflows that `--help` alone won't explain. Consult the relevant module before proceeding:
 
-- **Data** — `gameinfo`, `database`, `cloud-save`, `dbusage`, `gamelog`, `chart` → [`data.md`](references/data.md)
+- **Data** — `game-info`, `database`, `cloud-save`, `db-usage`, `game-log`, `chart` → [`data.md`](references/data.md)
 - **Users** — `gamer`, `block`, `gm`, `group` → [`users.md`](references/users.md)
 - **Billing** — `receipt`, `refund`, `cash`, `coupon`, `webshop`, `payment` → [`billing.md`](references/billing.md)
 - **Operations** — `operation`, `event`, `push`, `notification`, `post`, `notice`, `alarm`, `setting` → [`operation.md`](references/operation.md)
-- **Leaderboard** — `leaderboard`, `rank`, `guild` → [`leaderboard.md`](references/leaderboard.md)
-- **Analytics** — `dashboard`, `statistics`, `feature` → [`analytics.md`](references/analytics.md)
-- **Infrastructure** — `serverapi`, `realtime-noti`, `world`, `matchmake`, `serviceplan`, `probability`, `random-pool`, `random`, `function` → [`infra.md`](references/infra.md)
+- **Leaderboard** — `leaderboard`, `guild` → [`leaderboard.md`](references/leaderboard.md)
+- **Analytics** — `dashboard`, `feature` → [`analytics.md`](references/analytics.md)
+- **Infrastructure** — `server-api`, `realtime`, `world`, `matchmaking`, `serviceplan`, `probability`, `random-pool`, `function` → [`infra.md`](references/infra.md)
 - **Content** — `chat`, `popup`, `tutorial`, `console`, `account-setting` → [`content.md`](references/content.md)
 
-## High-risk commands — always dry-run first
+## High-risk commands — always preview first
 
-Some commands mutate data at scale and are irreversible. Before running any of these, run with `--dry-run` first and confirm the affected list with the user:
+Some commands mutate data at scale and are irreversible. These commands do NOT support `--dry-run`. Instead, always do a read-only lookup to preview the affected targets, confirm with the user, then execute:
 
 - `gamer delete` — permanent player account deletion (accepts multiple IDs)
 - `leaderboard reset` — wipes all scores for a leaderboard
-- `block gamer` (bulk) — blocks multiple players at once
+- `block gamer ban` (bulk) — blocks multiple players at once
 - `coupon delete` (bulk) — invalidates multiple coupons at once
 
 Pattern:
 ```
-backnd <command> --dry-run ...    # show what would happen
-# review output with user, then:
-backnd <command> ...              # execute only after user confirms
+backnd <read-command> --json ...  # preview what will be affected
+# show the list to the user and confirm intent, then:
+backnd <mutate-command> ...       # execute only after user confirms
 ```
 
-Never execute a mass-mutation command in a single step without a prior dry-run.
+Never execute a mass-mutation command in a single step without a prior read-only preview and explicit user confirmation.
 
 For complex multi-step workflows involving these operations, see hero recipes:
 - [`bulk-block.md`](references/bulk-block.md) — 여러 플레이어 일괄 차단 워크플로우
@@ -93,7 +93,7 @@ For complex multi-step workflows involving these operations, see hero recipes:
 `--help`만으로는 파악하기 어려운 흐름이 있는 작업:
 - [`coupon-lifecycle.md`](references/coupon-lifecycle.md) — 쿠폰 캠페인 생성부터 코드 관리까지
 - [`data-export.md`](references/data-export.md) — --json 파이프라인으로 유저·매출·리텐션 데이터 추출
-- [`gameinfo-table.md`](references/gameinfo-table.md) — gameinfo 커스텀 테이블 생성 및 행 관리
+- [`gameinfo-table.md`](references/gameinfo-table.md) — game-info 커스텀 테이블 생성 및 행 관리
 
 ## Pagination
 
@@ -101,7 +101,7 @@ Many list commands return a limited set of results. Always check whether more pa
 
 ### Cursor-based (`--next-page`)
 
-Commands: `gamer list`, `push list`, `guild guilds`, and others.
+Commands: `gamer list`, `push list`, `guild list`, and others.
 
 After the JSON data, a separate status line signals whether more results exist:
 

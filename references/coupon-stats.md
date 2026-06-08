@@ -14,7 +14,7 @@ offset 기반 페이지네이션 — 반환 건수가 `--limit`보다 적을 때
 
 각 쿠폰 ID에 대해 사용 내역 조회:
 ```
-backnd coupon usage --json --coupon-id <coupon-id>
+backnd coupon usage list --json --coupon-id <coupon-id>
 ```
 
 건수가 많으면 동일하게 페이지네이션 처리.

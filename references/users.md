@@ -19,12 +19,13 @@ Commands: `gamer`, `block`, `gm`, `group`
 - Multi-character or party grouping within the game
 - Not related to admin groups or GM groups
 
-## High-risk operations (E3 — always dry-run first)
+## High-risk operations (E3 — always preview first)
 
-`gamer delete` and bulk variants permanently delete player accounts. No undo.
+`gamer delete` and bulk variants permanently delete player accounts. No undo. These commands do NOT support `--dry-run`.
 
 ```
 backnd gamer list --json --nickname "..."         # find targets first
+# show the list to the user and confirm intent, then:
 backnd gamer delete <gamer-id>                   # single delete
 backnd gamer delete <id1> <id2> <id3>            # bulk delete (multiple positional args)
 ```
@@ -37,7 +38,7 @@ then confirm with the user before deleting.
 **Find a player by nickname / ID:**
 ```
 backnd gamer list --json --nickname "..."
-backnd gamer describe --json --gamer-id <gamer-id>
+backnd gamer describe --json <gamer-id>
 ```
 
 **Check if a player is currently blocked:**
