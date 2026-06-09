@@ -149,6 +149,7 @@
 | 랭크, 등급 | leaderboard |
 | 매칭, 매칭 풀 | matchmaking |
 | 그룹, 멀티 캐릭터 | group |
+| 리더보드 그룹, 그룹별 순위, 그룹 구분 | leaderboard (--group-name, NOT backnd group) |
 | 월드, 멀티플레이, 월드 서버 | world |
 
 ### 알림·메시지

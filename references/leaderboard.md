@@ -2,6 +2,27 @@
 
 Commands: `leaderboard`, `guild`
 
+## 핵심 개념
+
+**그룹(group) — leaderboard 파티션**
+`backnd group`(멀티 캐릭터)과 무관. 리더보드를 여러 독립 구간으로 나누는 파티션 키.
+기본값 `default`. 서버별·지역별 별도 순위가 필요할 때 사용.
+`rank list --group-name <name>`, `rank download --group-name <name>`으로 지정.
+현재 그룹 설정은 `leaderboard describe --json <uuid>`의 group division 필드에서 확인.
+
+**rank-type: user vs guild**
+`rank list`에서 --gamer-id/--nickname/--guild-name으로 검색 시 필수.
+- `user`: 개인 게이머 순위
+- `guild`: 길드 단위 순위 (union rank 전용)
+
+**union rank leaderboard**
+길드 점수를 지원하는 특수 타입.
+`leaderboard score guild`, `leaderboard guild-column`, `leaderboard reward`가 이 타입에만 해당.
+
+**leaderboard score guild vs backnd guild**
+- `backnd guild`: 길드 존재 자체 관리 (생성/삭제/멤버/타입)
+- `backnd leaderboard score guild`: union rank 리더보드에서 길드 점수 조작
+
 ## Non-obvious distinctions
 
 **leaderboard**
