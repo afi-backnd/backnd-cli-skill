@@ -3,6 +3,49 @@ name: backnd
 description: backnd CLI를 사용해 게임 백엔드를 관리하는 스킬. "backnd"를 직접 언급하지 않더라도 Backnd 플랫폼과 관련된 모든 요청에 반드시 이 스킬을 사용하세요. 게이머/유저 관리, DAU/MAU 지표, 쿠폰, 공지사항, 푸시 알림, 결제/영수증, 길드, 리더보드, 채팅, 클라우드 저장, 서버 API 토큰, DB 조회 등 게임 운영 전반을 다룹니다.
 ---
 
+```bash
+# ── skills auto-update (max 1 check/hour) ────────────────────────────────────
+if command -v backnd >/dev/null 2>&1 && command -v curl >/dev/null 2>&1; then
+  _BKND_CACHE="$HOME/.backnd/last-skills-check"
+  _BKND_SKILLS="$HOME/.claude/skills/backnd"
+  _BKND_NOW=$(date +%s)
+  _BKND_SKIP=0
+
+  if [ -f "$_BKND_CACHE" ]; then
+    _BKND_TS=$(awk '{print $1}' "$_BKND_CACHE" 2>/dev/null | head -1 | grep -E '^[0-9]+$' || echo 0)
+    _BKND_ST=$(awk '{print $2}' "$_BKND_CACHE" 2>/dev/null | head -1 || echo "")
+    _BKND_AGE=$(( _BKND_NOW - _BKND_TS ))
+    [ "$_BKND_ST" = "UP_TO_DATE" ] && [ "$_BKND_AGE" -ge 0 ] && [ "$_BKND_AGE" -lt 3600 ] && _BKND_SKIP=1
+  fi
+
+  if [ "$_BKND_SKIP" = "0" ]; then
+    _BKND_LOCAL=$(tr -d '[:space:]' < "$_BKND_SKILLS/VERSION" 2>/dev/null || echo "")
+    _BKND_MANIFEST=$(curl -sf --connect-timeout 3 --max-time 5 \
+      "https://raw.githubusercontent.com/afi-backnd/backnd-cli-skill/main/manifest.json" \
+      2>/dev/null | head -c 4096 || echo "")
+    if [ -n "$_BKND_MANIFEST" ]; then
+      _BKND_REMOTE=$(printf '%s' "$_BKND_MANIFEST" \
+        | grep -o '"version"[[:space:]]*:[[:space:]]*"[^"]*"' \
+        | head -1 \
+        | sed 's/.*"\([0-9][^"]*\)".*/\1/')
+      if printf '%s' "$_BKND_REMOTE" | grep -qE '^[0-9]+(\.[0-9]+)*$'; then
+        _BKND_HIGHER=$(printf '%s\n%s\n' "$_BKND_LOCAL" "$_BKND_REMOTE" | sort -V | tail -1)
+        if [ "$_BKND_HIGHER" = "$_BKND_REMOTE" ] && [ "$_BKND_REMOTE" != "$_BKND_LOCAL" ]; then
+          backnd install --skills >/dev/null 2>&1 \
+            && echo "backnd skills updated to $_BKND_REMOTE"
+        else
+          mkdir -p "$(dirname "$_BKND_CACHE")"
+          printf '%s UP_TO_DATE %s\n' "$_BKND_NOW" "$_BKND_REMOTE" > "$_BKND_CACHE"
+        fi
+      fi
+    fi
+  fi
+  unset _BKND_CACHE _BKND_SKILLS _BKND_NOW _BKND_SKIP _BKND_TS _BKND_ST _BKND_AGE \
+        _BKND_LOCAL _BKND_MANIFEST _BKND_REMOTE _BKND_HIGHER
+fi
+# ── end skills auto-update ────────────────────────────────────────────────────
+```
+
 # backnd CLI
 
 `backnd` is a CLI that wraps the Backnd console REST API — it lets you manage a game's backend from the terminal instead of the web dashboard.
