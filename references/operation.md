@@ -31,6 +31,13 @@ Commands: `operation`, `push`, `notification`, `post`, `notice`, `alarm`, `setti
 
 ## Emergency notice rules
 
+**Three independent subcommands — each does one thing**
+- `notice emergency activate` — sets isUse=true, preserves current content
+- `notice emergency deactivate` — sets isUse=false, preserves current content
+- `notice emergency update --contents "..." --language-contents '{"en":"..."}'` — updates content, preserves isUse
+
+All three do a GET first (read-modify-write), so `--version` is auto-populated from the fetched state.
+
 **`notice emergency update` — `en` key is mandatory in `--language-contents`**
 - English (`en`) is the required default language and cannot be omitted
 - The front-end prevents deleting the English tab; the CLI enforces the same rule
