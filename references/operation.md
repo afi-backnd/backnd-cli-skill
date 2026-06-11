@@ -29,6 +29,14 @@ Commands: `operation`, `push`, `notification`, `post`, `notice`, `alarm`, `setti
 - Alert threshold configuration (e.g. "notify when DAU drops below X")
 - Not a player-facing feature
 
+## Emergency notice rules
+
+**`notice emergency update` — `en` key is mandatory in `--language-contents`**
+- English (`en`) is the required default language and cannot be omitted
+- The front-end prevents deleting the English tab; the CLI enforces the same rule
+- Always pass `en` first: `--language-contents '{"en":"Server maintenance.","ko":"점검중."}'`
+- If the user asks to register an emergency notice in Korean only, use `en` for the content text as well (or ask the user for an English translation) — never send a payload without `"en"`
+
 ## Announcement pattern
 
 "공지사항 올려줘":
