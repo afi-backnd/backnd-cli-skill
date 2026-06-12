@@ -111,9 +111,26 @@ Some domains have non-obvious command distinctions, high-risk operations, or mul
 
 Some commands mutate data at scale and are irreversible. These commands do NOT support `--dry-run`. Instead, always do a read-only lookup to preview the affected targets, confirm with the user, then execute:
 
+**Users / accounts**
 - `gamer delete` — permanent player account deletion (accepts multiple IDs)
-- `leaderboard reset` — wipes all scores for a leaderboard
 - `block gamer ban` (bulk) — blocks multiple players at once
+
+**Leaderboard / guild**
+- `leaderboard reset` — wipes all scores for a leaderboard
+- `leaderboard delete` — destroys the board configuration and all round history (distinct from reset, which only clears scores)
+- `guild delete` — irreversible; all members lose their guild affiliation
+
+**Game data (game-info)**
+- `game-info table delete` — drops the entire custom DynamoDB table and all its rows
+- `game-info table init` — wipes ALL data rows from a table (schema is preserved, but all row data is gone; the name is misleading)
+- `game-info row delete` — deletes a data row permanently
+
+**Chart (client-served config tables)**
+- `chart delete` — removes a live game-client config table; can break the game client for all players
+- `chart file delete` — removes a chart file version permanently
+- `chart row delete` — deletes rows from a live chart file at scale
+
+**Billing**
 - `coupon delete` (bulk) — invalidates multiple coupons at once
 
 Pattern:
